@@ -90,8 +90,6 @@ export function RecipientCardLive({ recipient, onClick }: Props) {
   const c = colorClasses[recipient.color];
   const initial = recipient.name.charAt(0).toUpperCase();
   const birthdate = formatBirthdate(recipient.birthdate);
-  const isEmpty =
-    !birthdate && recipient.careCircleCount === 0 && recipient.activeServices === 0;
 
   return (
     <button
