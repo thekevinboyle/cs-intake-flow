@@ -402,10 +402,25 @@ function S12() {
         </div>
         <div className="flex-1">
           <p className="mb-3 text-[13px] font-semibold uppercase tracking-widest text-nw-quaternary">
-            Figma component
+            Component variants
           </p>
-          <div className="flex h-72 items-center justify-center rounded-nw-md border-2 border-dashed border-nw-border bg-nw-bg-subtle text-sm text-nw-quaternary">
-            Export from Figma
+          <div className="rounded-nw-md border border-nw-border bg-white p-5">
+            <div className="flex gap-4">
+              {[
+                { label: "Empty", r: emptyRecipient },
+                { label: "Partial", r: partialRecipient },
+                { label: "Full", r: fullRecipient },
+              ].map(({ label, r }) => (
+                <div key={label} className="flex-1">
+                  <p className="mb-2 text-center text-[10px] font-semibold uppercase tracking-widest text-nw-quaternary">
+                    {label}
+                  </p>
+                  <div className="origin-top scale-[0.42]">
+                    <RecipientCard recipient={r} />
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
