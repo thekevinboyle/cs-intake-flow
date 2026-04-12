@@ -53,6 +53,17 @@ function BulletList({ items }: { items: string[] }) {
   );
 }
 
+function Screenshot({ src, alt }: { src: string; alt: string }) {
+  const base = import.meta.env.BASE_URL;
+  return (
+    <img
+      src={`${base}screenshots/${src}`}
+      alt={alt}
+      className="h-auto max-h-80 rounded-nw-lg border border-nw-border object-contain shadow-nw-md"
+    />
+  );
+}
+
 function ScreenshotPlaceholder({ label }: { label: string }) {
   return (
     <div className="flex h-64 items-center justify-center rounded-nw-lg border-2 border-dashed border-nw-border bg-nw-bg-subtle text-sm text-nw-quaternary">
@@ -122,7 +133,7 @@ function S03() {
         mapped your design system surface by surface.
       </SlideBody>
       <div className="mt-10">
-        <ScreenshotPlaceholder label="app.wellthy.com — live capture, April 10, 2026 (blurred screenshot)" />
+        <Screenshot src="app-concierge-welcome.png" alt="Wellthy app concierge welcome screen — live capture, April 10, 2026" />
       </div>
     </Slide>
   );
@@ -179,9 +190,9 @@ function S05() {
         www.wellthy.com/profiles/care_recipients/create/ — a different hostname,
         a different tech stack, and a different design system era.
       </SlideBody>
-      <div className="mt-10 grid grid-cols-2 gap-8">
-        <ScreenshotPlaceholder label="React app — app.wellthy.com (with URL bar)" />
-        <ScreenshotPlaceholder label="Legacy form — www.wellthy.com/profiles/... (with URL bar)" />
+      <div className="mt-10 grid grid-cols-2 items-start gap-8">
+        <Screenshot src="app-concierge-welcome.png" alt="React app at app.wellthy.com" />
+        <Screenshot src="intake-step1-recipient-create.png" alt="Legacy intake form at www.wellthy.com/profiles/care_recipients/create/" />
       </div>
     </Slide>
   );
@@ -199,7 +210,7 @@ function S06() {
         guidance.
       </SlideBody>
       <div className="mt-10">
-        <ScreenshotPlaceholder label="intake-step1-filled.png — red circle around missing Next button area" />
+        <Screenshot src="intake-step1-filled.png" alt="Intake form with all fields filled but no Next button visible" />
       </div>
       <p className="mt-4 text-center text-sm italic text-nw-quaternary">
         No button. No error. No feedback.
@@ -361,7 +372,7 @@ function S12() {
           <p className="mb-3 text-sm font-medium uppercase tracking-wide text-nw-quaternary">
             Figma component
           </p>
-          <ScreenshotPlaceholder label="Figma component panel with variants (capture from Figma)" />
+          <ScreenshotPlaceholder label="Figma component panel with variants — drop Figma export here" />
         </div>
       </div>
     </Slide>
