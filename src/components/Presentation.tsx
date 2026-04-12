@@ -493,31 +493,97 @@ function S15() {
   );
 }
 
+function FileCard({
+  name,
+  type,
+  description,
+  details,
+}: {
+  name: string;
+  type: string;
+  description: string;
+  details: string[];
+}) {
+  return (
+    <div className="flex flex-col rounded-nw-md border border-nw-border bg-white p-5 shadow-nw-xs">
+      <div className="flex items-center gap-3">
+        <div className="flex h-9 w-9 items-center justify-center rounded-nw-sm bg-periwinkle-100">
+          <span className="text-[11px] font-bold text-periwinkle-700">
+            {type}
+          </span>
+        </div>
+        <div>
+          <p className="font-mono text-[14px] font-semibold text-nw-primary">
+            {name}
+          </p>
+          <p className="text-[12px] text-nw-quaternary">{description}</p>
+        </div>
+      </div>
+      <ul className="mt-4 space-y-1.5">
+        {details.map((d, i) => (
+          <li
+            key={i}
+            className="flex items-start gap-2 text-[13px] leading-snug text-nw-tertiary"
+          >
+            <span className="mt-1 h-1 w-1 shrink-0 rounded-full bg-periwinkle-400" />
+            {d}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 function S16() {
   return (
     <Slide>
-      <div className="flex flex-1 flex-col justify-center">
+      <div className="shrink-0">
         <H1>How AI shaped this case study.</H1>
-        <div className="mt-10 space-y-4">
-          {[
-            { phase: "Audit phase", desc: "Claude Code (extraction) → me (synthesis)", color: "bg-periwinkle-200" },
-            { phase: "Design phase", desc: "me (judgment)", color: "bg-periwinkle-100" },
-            { phase: "Code phase", desc: "Claude Code (scaffold) → me (polish)", color: "bg-periwinkle-200" },
-          ].map((band) => (
-            <div key={band.phase} className={`flex items-center gap-8 rounded-nw-md ${band.color} px-10 py-6`}>
-              <span className="w-36 text-[15px] font-semibold text-nw-primary">{band.phase}</span>
-              <span className="text-[17px] text-nw-secondary">{band.desc}</span>
-            </div>
-          ))}
-        </div>
-        <Bullets
-          items={[
-            "Claude Code handled the audit (DOM extraction, CSS property mining)",
-            "Claude Code drafted the initial React scaffold",
-            "Every design decision and redesign direction was a human call",
+        <Body className="mt-3">
+          Three artifacts built during this project — each one is a real file an
+          engineer could drop into the codebase on day one.
+        </Body>
+      </div>
+      <div className="mt-8 grid flex-1 grid-cols-3 gap-5 overflow-hidden">
+        <FileCard
+          name="CLAUDE.md"
+          type="CTX"
+          description="AI context file for the design system"
+          details={[
+            "Full nw-* token reference with semantic usage rules",
+            "Component patterns (RecipientCard, field chips, progress dots)",
+            "BEM → nw-* migration rules as enforceable constraints",
+            "Any engineer with Claude Code gets the rules automatically",
+          ]}
+        />
+        <FileCard
+          name="tokens.json"
+          type="DST"
+          description="Machine-readable design token spec"
+          details={[
+            "W3C Design Tokens format for cross-tool compatibility",
+            "4-tier text hierarchy, surfaces, borders, shadows",
+            "All 13 recipient identity colors with solid + bg variants",
+            "Single source of truth for Figma, Tailwind, and code",
+          ]}
+        />
+        <FileCard
+          name="migration-runbook.md"
+          type="RUN"
+          description="Step-by-step BEM → nw-* migration guide"
+          details={[
+            "Audit → Map → Replace → Verify → Update Figma → PR",
+            "AI-assisted: engineer runs one Claude Code command per component",
+            "Human reviews the diff, verifies visually, ships",
+            "Clean-cut only — no compatibility layers, no hybrid state",
           ]}
         />
       </div>
+      <p className="mt-5 shrink-0 text-[14px] text-nw-quaternary">
+        Every design decision was a human call. Claude Code handled extraction,
+        scaffolding, and documentation — the work that's mechanical and
+        repeatable.
+      </p>
     </Slide>
   );
 }
