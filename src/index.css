@@ -1,0 +1,94 @@
+@import "tailwindcss";
+
+@theme {
+  /* Typography — Fraunces (editorial serif) + Inter (humanist sans) */
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  /* nw-* text hierarchy (4-tier, stone-aligned) */
+  --color-nw-primary: #1c1917;       /* headlines */
+  --color-nw-secondary: #44403c;     /* body */
+  --color-nw-tertiary: #56524e;      /* supporting */
+  --color-nw-quaternary: #7a726c;    /* labels */
+
+  /* Backgrounds and surfaces */
+  --color-nw-bg-app: #f5f5f4;        /* warm stone page bg */
+  --color-nw-bg-card: #ffffff;       /* card surface */
+  --color-nw-bg-subtle: #f8f8f8;     /* secondary surface */
+  --color-nw-border: #e7e5e4;        /* card/divider border */
+  --color-nw-border-strong: #d6d3d1; /* stronger divider */
+
+  /* Periwinkle scale — signature CTA color */
+  --color-periwinkle-50:  hsl(213 100% 98%);
+  --color-periwinkle-100: hsl(219 100% 94%);
+  --color-periwinkle-200: hsl(219 100% 89%);
+  --color-periwinkle-300: hsl(221 100% 82%);
+  --color-periwinkle-400: hsl(226 95% 75%);
+  --color-periwinkle-500: hsl(230 89% 67%); /* primary = #6079F6 */
+  --color-periwinkle-600: hsl(235 80% 59%);
+  --color-periwinkle-700: hsl(237 62% 51%);
+  --color-periwinkle-800: hsl(236 58% 41%);
+  --color-periwinkle-900: hsl(234 51% 34%);
+
+  /* Recipient nature color system (13 identities) */
+  --color-recipient-lavender:    hsl(240 37% 66%);
+  --color-recipient-evergreen:   hsl(147 22% 39%);
+  --color-recipient-herb:        hsl(66 21% 44%);
+  --color-recipient-sage:        hsl(173 20% 40%);
+  --color-recipient-sandalwood:  hsl(8 53% 60%);
+  --color-recipient-berry:       hsl(324 35% 60%);
+  --color-recipient-plum:        hsl(301 37% 61%);
+  --color-recipient-peach:       hsl(13 90% 60%);
+  --color-recipient-honey:       hsl(33 83% 47%);
+  --color-recipient-aqua:        hsl(186 55% 48%);
+  --color-recipient-wildflower:  hsl(353 26% 60%);
+  --color-recipient-mist:        hsl(205 19% 46%);
+  --color-recipient-periwinkle:  hsl(230 89% 67%);
+
+  /* Lighter pastel variants for banners (matches Wellthy's gradient approach) */
+  --color-recipient-lavender-bg:    hsl(240 37% 90%);
+  --color-recipient-evergreen-bg:   hsl(147 22% 88%);
+  --color-recipient-herb-bg:        hsl(66 21% 88%);
+  --color-recipient-sage-bg:        hsl(173 20% 88%);
+  --color-recipient-sandalwood-bg:  hsl(8 53% 92%);
+  --color-recipient-berry-bg:       hsl(324 35% 92%);
+  --color-recipient-plum-bg:        hsl(301 37% 92%);
+  --color-recipient-peach-bg:       hsl(13 90% 92%);
+  --color-recipient-honey-bg:       hsl(33 83% 92%);
+  --color-recipient-aqua-bg:        hsl(186 55% 90%);
+  --color-recipient-wildflower-bg:  hsl(353 26% 92%);
+  --color-recipient-mist-bg:        hsl(205 19% 90%);
+  --color-recipient-periwinkle-bg: hsl(219 100% 94%);
+
+  /* Semantic status colors */
+  --color-success: #008000;
+  --color-warning: #ffca6b;
+  --color-error: #e12723;
+
+  /* Shadow tokens — layered elevation */
+  --shadow-nw-xs: 0 1px 2px rgba(23, 20, 18, 0.05);
+  --shadow-nw-sm: 0 1px 3px rgba(23, 20, 18, 0.1), 0 1px 2px -1px rgba(23, 20, 18, 0.1);
+  --shadow-nw-md: 0 4px 6px -1px rgba(23, 20, 18, 0.1), 0 2px 4px -2px rgba(23, 20, 18, 0.1);
+  --shadow-nw-lg: 0 10px 15px -3px rgba(23, 20, 18, 0.1), 0 4px 6px -4px rgba(23, 20, 18, 0.1);
+  --shadow-nw-xl: 0 20px 25px -5px rgba(23, 20, 18, 0.1), 0 8px 10px -6px rgba(23, 20, 18, 0.1);
+
+  /* Radius scale */
+  --radius-nw-sm: 8px;
+  --radius-nw-md: 12px;
+  --radius-nw-lg: 16px;
+  --radius-nw-xl: 24px;
+}
+
+/* Base */
+html, body {
+  margin: 0;
+  background: var(--color-nw-bg-app);
+  color: var(--color-nw-secondary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  min-height: 100vh;
+}
