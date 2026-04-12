@@ -138,10 +138,10 @@ function S03() {
   return (
     <Slide>
       <div className="shrink-0">
-        <H1>I logged in.</H1>
+        <H1>Starting with the product.</H1>
         <Body className="mt-3">
-          I pulled your production DOM, extracted your CSS custom properties, and
-          mapped your design system surface by surface.
+          The audit pulled your production DOM, extracted your CSS custom
+          properties, and mapped the design system surface by surface.
         </Body>
       </div>
       <div className="mt-8 flex flex-1 items-center justify-center overflow-hidden">
@@ -159,7 +159,7 @@ function S04() {
     <Slide>
       <div className="shrink-0">
         <Label>Finding one</Label>
-        <H1>Your Recipient card lives in three eras at once.</H1>
+        <H1>The Recipient card lives in three eras at once.</H1>
       </div>
       <div className="mt-8 flex flex-1 flex-col justify-center">
         <Code
@@ -195,7 +195,7 @@ function S05() {
     <Slide>
       <div className="shrink-0">
         <Label>Finding two</Label>
-        <H1>Your most important CTA takes users out of your app.</H1>
+        <H1>The most important CTA takes users out of the app.</H1>
         <Body className="mt-3">
           Clicking "Get Started" navigates from{" "}
           <span className="font-semibold">app.wellthy.com</span> to{" "}
@@ -231,7 +231,8 @@ function S06() {
         <Label>Finding three</Label>
         <H1>The Next button is silently hidden.</H1>
         <Body className="mt-3">
-          I filled the form. The Next button never appeared. No error, no hint.
+          The form was filled out completely. The Next button never appeared. No
+          error, no hint.
         </Body>
       </div>
       <div className="mt-6 flex flex-1 items-center justify-center overflow-hidden">
@@ -249,7 +250,7 @@ function S07() {
     <Slide>
       <div className="shrink-0">
         <Label>Finding four</Label>
-        <H1>Your Recipient card shows me nothing when I'm new.</H1>
+        <H1>New users see nothing on the Recipient card.</H1>
       </div>
       <div className="mt-8 flex flex-1 flex-col items-center justify-center gap-6">
         <div className="scale-125">
@@ -296,7 +297,7 @@ function S09() {
         <div className="mt-12 space-y-8">
           {[
             { label: "Layer 1: Redesign the card itself", sprints: 1, w: "25%", color: "bg-periwinkle-300" },
-            { label: "Layer 2: Extract it into your design system", sprints: 2, w: "50%", color: "bg-periwinkle-500" },
+            { label: "Layer 2: Extract it into the design system", sprints: 2, w: "50%", color: "bg-periwinkle-500" },
             { label: "Layer 3: Rebuild the intake flow on React", sprints: 3, w: "75%", color: "bg-periwinkle-700" },
           ].map((layer) => (
             <div key={layer.label} className="flex items-center gap-8">
@@ -351,7 +352,7 @@ function S11() {
     <Slide>
       <div className="shrink-0">
         <Label>Layer one</Label>
-        <H1>The card as I'd redesign it.</H1>
+        <H1>The card, redesigned.</H1>
       </div>
       <div className="flex flex-1 items-center justify-center gap-10">
         {[
@@ -376,10 +377,10 @@ function S12() {
     <Slide>
       <div className="shrink-0">
         <Label>Layer two</Label>
-        <H1>Unify the card's class list.</H1>
+        <H1>Unifying the card's class list.</H1>
         <Body className="mt-3">
-          Three concrete moves — token migration, component extraction,
-          governance.
+          Three concrete moves — token migration, component extraction, and a
+          shared governance rule.
         </Body>
       </div>
       <div className="mt-8 flex flex-1 items-start gap-12 overflow-hidden">
@@ -419,7 +420,7 @@ function S13() {
     <Slide>
       <div className="shrink-0">
         <Label>Layer three</Label>
-        <H1>Rebuild the intake flow on React.</H1>
+        <H1>Rebuilding the intake flow on React.</H1>
       </div>
       <div className="mt-6 flex flex-1 items-center justify-center overflow-hidden">
         <div className="origin-center scale-[0.92]">
@@ -453,7 +454,7 @@ function S15() {
   return (
     <Slide>
       <div className="shrink-0">
-        <H1>Scoping: what ships first, what ships later.</H1>
+        <H1>What we'd ship first, and what comes later.</H1>
       </div>
       <div className="mt-8 flex-1 overflow-hidden rounded-nw-lg border border-nw-border bg-white">
         <table className="w-full text-left">
@@ -496,7 +497,7 @@ function S16() {
   return (
     <Slide>
       <div className="flex flex-1 flex-col justify-center">
-        <H1>How I used AI on the case study itself.</H1>
+        <H1>How AI shaped this case study.</H1>
         <div className="mt-10 space-y-4">
           {[
             { phase: "Audit phase", desc: "Claude Code (extraction) → me (synthesis)", color: "bg-periwinkle-200" },
@@ -511,9 +512,9 @@ function S16() {
         </div>
         <Bullets
           items={[
-            "Claude Code for the audit (DOM extraction, CSS property mining)",
+            "Claude Code handled the audit (DOM extraction, CSS property mining)",
             "Claude Code drafted the initial React scaffold",
-            "Every design decision and redesign direction is mine",
+            "Every design decision and redesign direction was a human call",
           ]}
         />
       </div>
@@ -559,13 +560,13 @@ function S19() {
   return (
     <Slide>
       <div className="flex flex-1 flex-col justify-center">
-        <H1>If I joined on day one.</H1>
+        <H1>A potential first month together.</H1>
         <div className="mt-14 grid grid-cols-4 gap-8">
           {[
-            { time: "Week 1", text: "Validate or adjust the scoping table with the engineering manager" },
+            { time: "Week 1", text: "Validate the scoping table together with the engineering manager" },
             { time: "Week 2", text: "Ship the new Recipient card behind a flag" },
-            { time: "Week 3", text: "Start the design system migration with the token work" },
-            { time: "Month 2", text: "Propose the AI-assisted class pattern audit as a team experiment" },
+            { time: "Week 3", text: "Start the design system migration with the team" },
+            { time: "Month 2", text: "Propose the AI-assisted class pattern audit as a shared experiment" },
           ].map((item, i) => (
             <div key={i} className="text-center">
               <div className="mx-auto mb-5 h-5 w-5 rounded-full bg-periwinkle-500" />
