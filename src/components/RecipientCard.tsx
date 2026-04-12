@@ -77,8 +77,9 @@ const colorClasses: Record<
 };
 
 function formatBirthdate(iso: string): string {
-  const d = new Date(iso);
-  return d.toLocaleDateString("en-US", {
+  const [y, m, d] = iso.split("-").map(Number);
+  const date = new Date(y, m - 1, d);
+  return date.toLocaleDateString("en-US", {
     month: "short",
     day: "numeric",
     year: "numeric",
@@ -135,6 +136,13 @@ function ProgressDots({
   );
 }
 
+const subtitles: Record<string, (name: string, activity?: string) => string> = {
+  empty: (name) =>
+    `Tell us about ${name} in a sentence — your Care Coordinator will use it to get started.`,
+  partial: () => "Keep going — a few more details help your Care Team.",
+  full: (_name, activity) => activity ?? "Profile complete",
+};
+
 export function RecipientCard({ recipient, onClick }: Props) {
   const c = colorClasses[recipient.color];
   const initial = recipient.name.charAt(0).toUpperCase();
@@ -160,16 +168,18 @@ export function RecipientCard({ recipient, onClick }: Props) {
       aria-label={recipient.name}
       className="group relative block w-[432px] overflow-hidden rounded-nw-lg border border-nw-border bg-nw-bg-card text-left shadow-nw-xs transition duration-300 hover:-translate-y-1 hover:shadow-nw-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-periwinkle-500"
     >
-      {/* Banner */}
+      {/* Banner — pl-20 clears the avatar overlap zone */}
       <div
-        className={`${c.banner} flex h-12 items-center justify-end gap-2 px-4`}
+        className={`${c.banner} flex h-12 items-center justify-end gap-2 pl-20 pr-4`}
       >
         {state === "full" && recipient.recentActivity && (
-          <span className="mr-auto text-[11px] font-medium text-nw-primary/40">
+          <span className="mr-auto truncate text-[11px] font-medium text-nw-primary/40">
             {recipient.recentActivity}
           </span>
         )}
-        <span className={`text-[11px] font-medium tracking-wide ${c.accent} opacity-60`}>
+        <span
+          className={`shrink-0 text-[11px] font-medium tracking-wide ${c.accent} opacity-60`}
+        >
           {colorName}
         </span>
         {state === "full" && (
@@ -178,7 +188,7 @@ export function RecipientCard({ recipient, onClick }: Props) {
             height="16"
             fill="none"
             viewBox="0 0 24 24"
-            className="text-nw-primary/40"
+            className="shrink-0 text-nw-primary/40"
             aria-hidden="true"
           >
             <path
@@ -192,8 +202,8 @@ export function RecipientCard({ recipient, onClick }: Props) {
         )}
       </div>
 
-      {/* Content */}
-      <div className="px-6 pb-5 pt-9">
+      {/* Content — min-h keeps all 3 states the same card height */}
+      <div className="flex min-h-[188px] flex-col px-6 pb-5 pt-9">
         {/* Name row */}
         <div className="flex items-center gap-1.5">
           <h3 className="font-display text-xl font-semibold leading-7 text-nw-primary">
@@ -204,27 +214,13 @@ export function RecipientCard({ recipient, onClick }: Props) {
           )}
         </div>
 
-        {/* Empty-state invitation */}
-        {state === "empty" && (
-          <p className="mt-2.5 text-[13px] leading-relaxed text-nw-tertiary">
-            Tell us about {recipient.name} in a sentence — your Care
-            Coordinator will use it to get started.
-          </p>
-        )}
+        {/* Subtitle — always present, same style across all states */}
+        <p className="mt-2 text-[13px] leading-relaxed text-nw-tertiary">
+          {subtitles[state](recipient.name, recipient.recentActivity)}
+        </p>
 
-        {/* Partial-state encouragement */}
-        {state === "partial" && (
-          <p className="mt-2 text-[13px] text-nw-quaternary">
-            Keep going — a few more details help your Care Team.
-          </p>
-        )}
-
-        {/* Full-state activity (if not shown in banner) */}
-        {state === "full" && !recipient.recentActivity && (
-          <p className="mt-2 text-[13px] text-nw-quaternary">
-            Profile complete
-          </p>
-        )}
+        {/* Spacer pushes chips and dots to the bottom */}
+        <div className="flex-1" />
 
         {/* Field chips — always show all 3 slots */}
         <div className="mt-3 flex flex-wrap gap-2">
