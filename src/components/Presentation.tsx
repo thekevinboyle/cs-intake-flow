@@ -252,11 +252,9 @@ function S07() {
         <Label>Finding four</Label>
         <H1>New users see nothing on the Recipient card.</H1>
       </div>
-      <div className="mt-8 flex flex-1 flex-col items-center justify-center gap-6">
-        <div className="scale-125">
-          <RecipientCardLive recipient={emptyRecipient} />
-        </div>
-        <p className="text-[15px] italic text-nw-quaternary">
+      <div className="mt-6 flex flex-1 flex-col items-center justify-center gap-5">
+        <RecipientCardLive recipient={emptyRecipient} />
+        <p className="shrink-0 text-[15px] italic text-nw-quaternary">
           What a new member sees. No CTA, no hint, no next step.
         </p>
       </div>

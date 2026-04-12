@@ -161,17 +161,6 @@ export function RecipientCardLive({ recipient, onClick }: Props) {
           </div>
         </div>
 
-        {/*
-          Empty-state slot — today this is just the faithful reproduction
-          of the live card's dead-dash pattern. On Sunday this is where
-          Kevin's Figma redesign drops in (progressive completion + the
-          conversation-starter invitation per intake-flow-rationale.md).
-        */}
-        {isEmpty && (
-          <div className="mt-4 text-xs italic text-nw-quaternary">
-            Empty state — awaiting Sunday Figma redesign drop-in.
-          </div>
-        )}
       </div>
 
       {/* Avatar — absolute positioned to overlap banner and content */}
