@@ -539,20 +539,39 @@ function S16() {
     <Slide>
       <div className="shrink-0">
         <H1>How AI shaped this case study.</H1>
-        <Body className="mt-3">
-          Three artifacts built during this project — each one is a real file an
-          engineer could drop into the codebase on day one.
-        </Body>
       </div>
-      <div className="mt-8 grid flex-1 grid-cols-3 gap-5 overflow-hidden">
+
+      {/* Phase bands — the workflow */}
+      <div className="mt-6 flex shrink-0 gap-3">
+        {[
+          { phase: "Audit", desc: "Claude Code (extraction) → human (synthesis)", color: "bg-periwinkle-200" },
+          { phase: "Design", desc: "Human (judgment)", color: "bg-periwinkle-100" },
+          { phase: "Code", desc: "Claude Code (scaffold) → human (polish)", color: "bg-periwinkle-200" },
+        ].map((band) => (
+          <div
+            key={band.phase}
+            className={`flex flex-1 items-center gap-4 rounded-nw-sm ${band.color} px-5 py-3`}
+          >
+            <span className="text-[13px] font-semibold text-nw-primary">
+              {band.phase}
+            </span>
+            <span className="text-[13px] text-nw-secondary">{band.desc}</span>
+          </div>
+        ))}
+      </div>
+
+      {/* Artifact cards — what was produced */}
+      <p className="mt-6 shrink-0 text-[13px] font-semibold uppercase tracking-[0.15em] text-nw-quaternary">
+        Artifacts produced — ready for day one
+      </p>
+      <div className="mt-3 grid flex-1 grid-cols-3 gap-4 overflow-hidden">
         <FileCard
           name="CLAUDE.md"
           type="CTX"
           description="AI context file for the design system"
           details={[
             "Full nw-* token reference with semantic usage rules",
-            "Component patterns (RecipientCard, field chips, progress dots)",
-            "BEM → nw-* migration rules as enforceable constraints",
+            "Component patterns and class naming constraints",
             "Any engineer with Claude Code gets the rules automatically",
           ]}
         />
@@ -562,7 +581,6 @@ function S16() {
           description="Machine-readable design token spec"
           details={[
             "W3C Design Tokens format for cross-tool compatibility",
-            "4-tier text hierarchy, surfaces, borders, shadows",
             "All 13 recipient identity colors with solid + bg variants",
             "Single source of truth for Figma, Tailwind, and code",
           ]}
@@ -573,16 +591,16 @@ function S16() {
           description="Step-by-step BEM → nw-* migration guide"
           details={[
             "Audit → Map → Replace → Verify → Update Figma → PR",
-            "AI-assisted: engineer runs one Claude Code command per component",
+            "AI-assisted: one Claude Code command per component",
             "Human reviews the diff, verifies visually, ships",
-            "Clean-cut only — no compatibility layers, no hybrid state",
           ]}
         />
       </div>
-      <p className="mt-5 shrink-0 text-[14px] text-nw-quaternary">
-        Every design decision was a human call. Claude Code handled extraction,
-        scaffolding, and documentation — the work that's mechanical and
-        repeatable.
+
+      <p className="mt-4 shrink-0 text-[15px] text-nw-tertiary">
+        Every design decision and redesign direction was a human call. Claude
+        Code handled extraction, scaffolding, and documentation — the work
+        that's mechanical and repeatable.
       </p>
     </Slide>
   );
