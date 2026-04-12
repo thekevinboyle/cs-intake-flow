@@ -138,8 +138,8 @@ function ProgressDots({
 
 const subtitles: Record<string, (name: string, activity?: string) => string> = {
   empty: (name) =>
-    `Tell us about ${name} in a sentence — your Care Coordinator will use it to get started.`,
-  partial: () => "Keep going — a few more details help your Care Team.",
+    `Tell us about ${name} in a sentence. Your Care Coordinator will use it to get started.`,
+  partial: () => "A few more details help your Care Team.",
   full: (_name, activity) => activity ?? "Profile complete",
 };
 

@@ -169,18 +169,17 @@ function S02() {
         <H1>
           Started with the product,
           <br />
-          not the portfolio.
+          not a portfolio.
         </H1>
         <Body className="mt-6">
-          Instead of preparing past work, the goal was to find a real problem
-          worth solving — using AI to accelerate the discovery, and design
-          judgment to decide what matters.
+          The goal was to find a real problem inside Wellthy's live product.
+          AI handled the extraction work. A human decided what mattered.
         </Body>
         <div className="mt-12 flex gap-3">
           {[
             { phase: "Discover", desc: "AI-assisted audit of the live product", color: "bg-periwinkle-200" },
             { phase: "Decide", desc: "Human judgment on what to solve first", color: "bg-periwinkle-100" },
-            { phase: "Design", desc: "A direction — not a finished spec", color: "bg-periwinkle-200" },
+            { phase: "Design", desc: "A starting direction, not a finished spec", color: "bg-periwinkle-200" },
           ].map((band) => (
             <div
               key={band.phase}
@@ -210,8 +209,7 @@ function S03() {
         <Body className="mt-3">
           Claude Code pulled the production DOM, extracted CSS custom properties,
           and mapped the design system surface by surface. Three hours of
-          AI-assisted extraction replaced what would have been two days of manual
-          work.
+          AI-assisted extraction instead of two days of manual work.
         </Body>
       </div>
       <div className="mt-8 flex flex-1 items-center justify-center overflow-hidden">
@@ -235,13 +233,13 @@ function S04() {
       <div className="mt-8 flex flex-1 flex-col justify-center">
         <Code
           lines={[
-            { text: "/* BEM — original era */", color: "#666" },
+            { text: "/* BEM (original era) */", color: "#666" },
             { text: "care-recipient-card", color: "#f87171" },
             { text: "", color: "" },
-            { text: "/* Tailwind — migration era */", color: "#666" },
+            { text: "/* Tailwind (migration era) */", color: "#666" },
             { text: "relative block w-full rounded-2xl", color: "#60a5fa" },
             { text: "", color: "" },
-            { text: "/* nw-* tokens — current era */", color: "#666" },
+            { text: "/* nw-* tokens (current era) */", color: "#666" },
             {
               text: "border-nw-secondary bg-nw-primary shadow-nw-xs",
               color: "#4ade80",
@@ -287,7 +285,7 @@ function S05() {
         </div>
         <div className="relative flex flex-col">
           <p className="mb-2 text-[13px] font-semibold uppercase tracking-widest text-red-500">
-            Legacy form — different hostname, different stack
+            Legacy form (different hostname, different stack)
           </p>
           <div className="flex-1 overflow-hidden">
             <Img src="intake-step1-recipient-create.png" alt="Legacy form" />
@@ -343,13 +341,14 @@ function S07() {
     <Slide>
       <div className="flex flex-1 flex-col justify-center">
         <H1>
-          Every finding points at the same component —<br />
+          Every finding points at the same component,
+          <br />
           and the same opportunity.
         </H1>
         <div className="mt-10 space-y-5">
           {[
-            "A design system migration that has a clear next surface to finish",
-            "An empty state that could become the warmest moment in the product",
+            "A design system migration with a clear next surface to finish",
+            "An empty state that could welcome new members instead of ignoring them",
             "An intake flow that could be rebuilt on the modern stack",
           ].map((text, i) => (
             <div
@@ -362,8 +361,8 @@ function S07() {
           ))}
         </div>
         <p className="mt-8 text-lg text-nw-tertiary">
-          The Recipient card sits at the center of all three. That's where a
-          first contribution could start.
+          The Recipient card sits at the center of all three. A good place for a
+          first contribution to start.
         </p>
       </div>
     </Slide>
@@ -378,8 +377,8 @@ function S08() {
         <Label>A starting direction</Label>
         <H1>Redesigning the empty state.</H1>
         <Body className="mt-3">
-          The card new members see in their first 90 seconds — transformed from
-          dead dashes into an invitation to start.
+          This is the card new members see in their first 90 seconds. Dead
+          dashes become an invitation to start.
         </Body>
       </div>
       <div className="mt-8 flex flex-1 items-center justify-center gap-16">
@@ -425,9 +424,9 @@ function S09() {
         <Label>A starting direction</Label>
         <H1>Rethinking the intake as a conversation.</H1>
         <Body className="mt-3">
-          Instead of a form that asks for a medical diagnosis in the first 30
-          seconds — a warm, human entry point. One step shown here; the rest
-          we'd design together.
+          Today's form asks for a medical diagnosis in the first 30 seconds.
+          This is a warmer entry point. One step shown here. The rest would
+          get designed together.
         </Body>
       </div>
       <div className="mt-8 flex flex-1 items-center justify-center gap-16 overflow-hidden">
@@ -495,7 +494,7 @@ function S09() {
             </p>
             {[
               "A freeform prompt instead of forced diagnosis fields",
-              "Optional context — skip is always visible",
+              "Optional context, with skip always visible",
               "A confirmation that sets concrete expectations",
             ].map((text, i) => (
               <div
@@ -524,8 +523,8 @@ function S10() {
       <div className="flex flex-1 flex-col justify-center">
         <H1>What we'd want to explore together.</H1>
         <Body className="mt-4">
-          This case study is a starting hypothesis, not a finished plan. Here are
-          the questions that would shape where it goes next.
+          This case study is a hypothesis. Here are the questions that would
+          shape where it goes next.
         </Body>
         <div className="mt-10 grid grid-cols-2 gap-5">
           {[
@@ -543,7 +542,7 @@ function S10() {
             },
             {
               q: "Is there a reason the legacy page still exists?",
-              why: "Hidden dependencies — a CRM integration, a coordinator workflow, a compliance requirement.",
+              why: "Hidden dependencies. A CRM integration, a coordinator workflow, a compliance requirement.",
             },
           ].map(({ q, why }) => (
             <div
@@ -573,17 +572,17 @@ function S11() {
         {[
           {
             phase: "Discover",
-            desc: "Claude Code (extraction) → human (synthesis)",
+            desc: "Claude Code extraction, human synthesis",
             color: "bg-periwinkle-200",
           },
           {
             phase: "Decide",
-            desc: "Human (judgment)",
+            desc: "Human judgment",
             color: "bg-periwinkle-100",
           },
           {
             phase: "Design",
-            desc: "Claude Code (scaffold) → human (polish)",
+            desc: "Claude Code scaffold, human polish",
             color: "bg-periwinkle-200",
           },
         ].map((band) => (
@@ -599,7 +598,7 @@ function S11() {
         ))}
       </div>
       <p className="mt-6 shrink-0 text-[13px] font-semibold uppercase tracking-[0.15em] text-nw-quaternary">
-        Artifacts produced — ready for day one
+        Artifacts produced, ready for day one
       </p>
       <div className="mt-3 grid flex-1 grid-cols-3 gap-4 overflow-hidden">
         <FileCard
@@ -634,8 +633,8 @@ function S11() {
         />
       </div>
       <p className="mt-4 shrink-0 text-[15px] text-nw-tertiary">
-        Every design decision and redesign direction was a human call. Claude
-        Code handled extraction, scaffolding, and documentation.
+        Every design decision was a human call. Claude Code handled extraction,
+        scaffolding, and documentation.
       </p>
     </Slide>
   );
@@ -666,10 +665,10 @@ function S13() {
         <H1>Why this role.</H1>
         <Bullets
           items={[
-            "I'm a design engineer — the seam between Figma and production is where I do my best work",
-            "Wellthy's mission aligns with my lived experience",
-            "The JD says \"fill UX gaps where designs don't exist yet\" — that's the work I like most",
-            "This case study is a sample of how I'd operate, not just what I'd ship",
+            "I'm a design engineer. The seam between Figma and production is where I do my best work.",
+            "Wellthy's mission aligns with my lived experience.",
+            "The JD says \"fill UX gaps where designs don't exist yet.\" That's the work I like most.",
+            "This case study is a sample of how I'd operate, not only what I'd ship.",
           ]}
         />
       </div>
@@ -684,8 +683,7 @@ function S14() {
       <div className="flex flex-1 flex-col items-center justify-center text-center">
         <H1Large>Let's talk.</H1Large>
         <p className="mt-8 text-xl text-nw-tertiary">
-          The prototype is live, the repo is public, and the questions on slide
-          10 are real.
+          The questions on slide 10 are real. I'd love to hear yours.
         </p>
       </div>
       <p className="shrink-0 text-center text-[15px] text-nw-quaternary">

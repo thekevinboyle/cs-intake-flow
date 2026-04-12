@@ -107,11 +107,11 @@ function Frame2() {
   return (
     <PhoneFrame step={2}>
       <h2 className="font-display text-2xl font-semibold leading-tight text-nw-primary">
-        Tell us what's going on — in your&nbsp;words
+        Tell us what's going&nbsp;on
       </h2>
       <p className="mt-2 text-sm leading-relaxed text-nw-tertiary">
         One sentence is fine. A paragraph is fine. We're not looking for a
-        diagnosis — just where you are today.
+        diagnosis. Just where you are today.
       </p>
       <div className="mt-5">
         <div className="min-h-[120px] rounded-nw-md border border-nw-border bg-nw-bg-subtle px-4 py-3">
@@ -145,7 +145,7 @@ function Frame3() {
         Anything we should&nbsp;know?
       </h2>
       <p className="mt-2 text-sm leading-relaxed text-nw-tertiary">
-        Totally optional. You can tell us more later — or not at all.
+        Totally optional. You can tell us more later, or not at all.
       </p>
       <div className="mt-5 space-y-4">
         <div>
@@ -173,7 +173,7 @@ function Frame3() {
           </div>
         </div>
       </div>
-      <PrimaryCTA>Skip — we have enough to start</PrimaryCTA>
+      <PrimaryCTA>Skip, we have enough to start</PrimaryCTA>
       <SecondaryCTA>Add what I wrote</SecondaryCTA>
     </PhoneFrame>
   );
