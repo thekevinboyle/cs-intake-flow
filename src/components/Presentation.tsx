@@ -1,6 +1,6 @@
 import { useState, useEffect, type ReactNode } from "react";
-import { RecipientCard } from "./RecipientCard";
 import { RecipientCardLive } from "./RecipientCardLive";
+import { InteractiveCardDemo } from "./InteractiveCardDemo";
 import { emptyRecipient } from "../lib/recipients";
 
 const BASE = import.meta.env.BASE_URL;
@@ -369,7 +369,7 @@ function S07() {
   );
 }
 
-// 8. The craft moment — before/after of the empty state ONLY
+// 8. The craft moment — interactive before/after, add fields to see the redesign come alive
 function S08() {
   return (
     <Slide>
@@ -377,8 +377,8 @@ function S08() {
         <Label>A starting direction</Label>
         <H1>Redesigning the empty state.</H1>
         <Body className="mt-3">
-          This is the card new members see in their first 90 seconds. Dead
-          dashes become an invitation to start.
+          The proposed card is live. Click the dashed chips to add fields and
+          watch it transform.
         </Body>
       </div>
       <div className="mt-8 flex flex-1 items-center justify-center gap-16">
@@ -407,11 +407,20 @@ function S08() {
         </div>
         <div className="flex flex-col items-center">
           <p className="mb-4 text-[13px] font-semibold uppercase tracking-[0.15em] text-periwinkle-600">
-            Proposed
+            Proposed (try it)
           </p>
-          <RecipientCard recipient={emptyRecipient} />
+          <InteractiveCardDemo />
         </div>
       </div>
+      <p className="mt-4 shrink-0 text-center text-[12px] text-nw-quaternary">
+        Built with Motion{" "}
+        <code className="rounded bg-nw-bg-subtle px-1.5 py-0.5">layout</code>{" "}
+        animations, CSS{" "}
+        <code className="rounded bg-nw-bg-subtle px-1.5 py-0.5">
+          @starting-style
+        </code>
+        , and anchor-positioned hover popovers on the full state.
+      </p>
     </Slide>
   );
 }

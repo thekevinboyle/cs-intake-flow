@@ -92,3 +92,35 @@ html, body {
 body {
   min-height: 100vh;
 }
+
+/* 2026 platform: @starting-style for entry animations of newly mounted pills.
+   Shipping in Chrome 117+, Firefox 129+, Safari 17.5+. Falls back cleanly. */
+.fresh-pill {
+  transition: opacity 220ms ease-out, transform 220ms ease-out;
+}
+
+@starting-style {
+  .fresh-pill {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+/* 2026 platform: CSS Anchor Positioning for the activity popover.
+   Appears on hover of the activity strip. Native, no JS library. */
+.activity-popover {
+  position-try-fallbacks: flip-block, flip-inline;
+}
+
+.group:hover .activity-popover,
+.group:focus-within .activity-popover {
+  display: block;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .fresh-pill,
+  .activity-popover {
+    transition: none;
+  }
+}

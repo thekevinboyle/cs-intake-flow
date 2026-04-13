@@ -1,8 +1,12 @@
+import { motion, AnimatePresence, LayoutGroup } from "motion/react";
 import type { Recipient, RecipientColor } from "../lib/recipients";
+
+export type FieldKey = "birthdate" | "careCircle" | "services";
 
 type Props = {
   recipient: Recipient;
   onClick?: () => void;
+  onAddField?: (field: FieldKey) => void;
 };
 
 const colorClasses: Record<
@@ -86,9 +90,21 @@ function formatBirthdate(iso: string): string {
   });
 }
 
-function AddChip({ label }: { label: string }) {
-  return (
-    <span className="inline-flex items-center gap-1 rounded-full border border-dashed border-nw-border px-3 py-1.5 text-xs text-nw-quaternary transition-colors group-hover:border-periwinkle-300 group-hover:text-periwinkle-600">
+function AddChip({
+  label,
+  onClick,
+}: {
+  label: string;
+  onClick?: () => void;
+}) {
+  const baseClasses =
+    "inline-flex items-center gap-1 rounded-full border border-dashed border-nw-border px-3 py-1.5 text-xs text-nw-quaternary transition-colors";
+  const interactiveClasses = onClick
+    ? "cursor-pointer hover:border-periwinkle-400 hover:bg-periwinkle-50 hover:text-periwinkle-600"
+    : "group-hover:border-periwinkle-300 group-hover:text-periwinkle-600";
+
+  const content = (
+    <>
       <svg
         width="12"
         height="12"
@@ -105,8 +121,25 @@ function AddChip({ label }: { label: string }) {
         />
       </svg>
       {label}
-    </span>
+    </>
   );
+
+  if (onClick) {
+    return (
+      <button
+        type="button"
+        onClick={(e) => {
+          e.stopPropagation();
+          onClick();
+        }}
+        className={`${baseClasses} ${interactiveClasses}`}
+      >
+        {content}
+      </button>
+    );
+  }
+
+  return <span className={`${baseClasses} ${interactiveClasses}`}>{content}</span>;
 }
 
 function FilledPill({ value }: { value: string }) {
@@ -125,13 +158,50 @@ function ProgressDots({
   return (
     <div className="flex items-center gap-1.5">
       {fields.map((filled, i) => (
-        <div
+        <motion.div
           key={i}
-          className={`h-1.5 w-1.5 rounded-full transition-colors ${
-            filled ? "bg-periwinkle-500" : "bg-nw-border"
-          }`}
+          className="h-1.5 w-1.5 rounded-full"
+          animate={{
+            backgroundColor: filled
+              ? "rgb(96, 121, 246)"
+              : "rgb(231, 229, 228)",
+            scale: filled ? 1.1 : 1,
+          }}
+          transition={{ type: "spring", stiffness: 400, damping: 25 }}
         />
       ))}
+    </div>
+  );
+}
+
+function ActivityPopover({
+  anchorName,
+  activity,
+}: {
+  anchorName: string;
+  activity: string;
+}) {
+  return (
+    <div
+      role="tooltip"
+      className="activity-popover pointer-events-none absolute z-10 hidden w-56 rounded-nw-md border border-nw-border bg-white p-3 text-left shadow-nw-lg"
+      style={
+        {
+          positionAnchor: anchorName,
+          top: "anchor(bottom)",
+          left: "anchor(left)",
+          translate: "0 8px",
+        } as React.CSSProperties
+      }
+    >
+      <p className="text-[11px] font-semibold uppercase tracking-wider text-nw-quaternary">
+        Recent activity
+      </p>
+      <ul className="mt-2 space-y-1.5 text-[12px] text-nw-tertiary">
+        <li>&middot; {activity}</li>
+        <li>&middot; Care plan updated yesterday</li>
+        <li>&middot; Introduction call scheduled</li>
+      </ul>
     </div>
   );
 }
@@ -143,11 +213,12 @@ const subtitles: Record<string, (name: string, activity?: string) => string> = {
   full: (_name, activity) => activity ?? "Profile complete",
 };
 
-export function RecipientCard({ recipient, onClick }: Props) {
+export function RecipientCard({ recipient, onClick, onAddField }: Props) {
   const c = colorClasses[recipient.color];
   const initial = recipient.name.charAt(0).toUpperCase();
   const colorName =
     recipient.color.charAt(0).toUpperCase() + recipient.color.slice(1);
+  const anchorName = `--recipient-${recipient.id}`;
 
   const hasBirthdate = !!recipient.birthdate;
   const hasCareCircle = recipient.careCircleCount > 0;
@@ -161,19 +232,22 @@ export function RecipientCard({ recipient, onClick }: Props) {
   const state: "empty" | "partial" | "full" =
     filledCount === 0 ? "empty" : filledCount === 3 ? "full" : "partial";
 
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      aria-label={recipient.name}
-      className="group relative block w-[432px] overflow-hidden rounded-nw-lg border border-nw-border bg-nw-bg-card text-left shadow-nw-xs transition duration-300 hover:-translate-y-1 hover:shadow-nw-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-periwinkle-500"
-    >
+  const cardClassName =
+    "group relative block w-[432px] overflow-hidden rounded-nw-lg border border-nw-border bg-nw-bg-card text-left shadow-nw-xs transition duration-300 hover:-translate-y-1 hover:shadow-nw-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-periwinkle-500";
+
+  const isInteractive = !!onAddField;
+
+  const inner = (
+    <LayoutGroup id={`card-${recipient.id}`}>
       {/* Banner — pl-20 clears the avatar overlap zone */}
       <div
         className={`${c.banner} flex h-12 items-center justify-end gap-2 pl-20 pr-4`}
       >
         {state === "full" && recipient.recentActivity && (
-          <span className="mr-auto truncate text-[11px] font-medium text-nw-primary/40">
+          <span
+            className="mr-auto truncate text-[11px] font-medium text-nw-primary/50"
+            style={{ anchorName } as React.CSSProperties}
+          >
             {recipient.recentActivity}
           </span>
         )}
@@ -202,8 +276,18 @@ export function RecipientCard({ recipient, onClick }: Props) {
         )}
       </div>
 
+      {state === "full" && recipient.recentActivity && (
+        <ActivityPopover
+          anchorName={anchorName}
+          activity={recipient.recentActivity}
+        />
+      )}
+
       {/* Content — min-h keeps all 3 states the same card height */}
-      <div className="flex min-h-[188px] flex-col px-6 pb-5 pt-9">
+      <motion.div
+        layout
+        className="flex min-h-[188px] flex-col px-6 pb-5 pt-9"
+      >
         {/* Name row */}
         <div className="flex items-center gap-1.5">
           <h3 className="font-display text-xl font-semibold leading-7 text-nw-primary">
@@ -214,42 +298,104 @@ export function RecipientCard({ recipient, onClick }: Props) {
           )}
         </div>
 
-        {/* Subtitle — always present, same style across all states */}
-        <p className="mt-2 text-[13px] leading-relaxed text-nw-tertiary">
-          {subtitles[state](recipient.name, recipient.recentActivity)}
-        </p>
+        {/* Subtitle */}
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.p
+            key={state}
+            layout
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="mt-2 text-[13px] leading-relaxed text-nw-tertiary"
+          >
+            {subtitles[state](recipient.name, recipient.recentActivity)}
+          </motion.p>
+        </AnimatePresence>
 
-        {/* Spacer pushes chips and dots to the bottom */}
-        <div className="flex-1" />
+        <motion.div layout className="flex-1" />
 
-        {/* Field chips — always show all 3 slots */}
-        <div className="mt-3 flex flex-wrap gap-2">
-          {hasBirthdate ? (
-            <FilledPill value={formatBirthdate(recipient.birthdate!)} />
-          ) : (
-            <AddChip label="Birthdate" />
-          )}
-          {hasCareCircle ? (
-            <FilledPill
-              value={`${recipient.careCircleCount} in Care Circle`}
-            />
-          ) : (
-            <AddChip label="Care Circle" />
-          )}
-          {hasServices ? (
-            <FilledPill
-              value={`${recipient.activeServices} active ${recipient.activeServices === 1 ? "service" : "services"}`}
-            />
-          ) : (
-            <AddChip label="Services" />
-          )}
-        </div>
+        {/* Field chips */}
+        <motion.div layout className="mt-3 flex flex-wrap gap-2">
+          <AnimatePresence initial={false}>
+            <motion.span
+              key={`birthdate-${hasBirthdate}`}
+              layout
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ type: "spring", stiffness: 400, damping: 30 }}
+              className="fresh-pill inline-flex"
+            >
+              {hasBirthdate ? (
+                <FilledPill value={formatBirthdate(recipient.birthdate!)} />
+              ) : (
+                <AddChip
+                  label="Birthdate"
+                  onClick={
+                    isInteractive
+                      ? () => onAddField!("birthdate")
+                      : undefined
+                  }
+                />
+              )}
+            </motion.span>
+            <motion.span
+              key={`careCircle-${hasCareCircle}`}
+              layout
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ type: "spring", stiffness: 400, damping: 30 }}
+              className="fresh-pill inline-flex"
+            >
+              {hasCareCircle ? (
+                <FilledPill
+                  value={`${recipient.careCircleCount} in Care Circle`}
+                />
+              ) : (
+                <AddChip
+                  label="Care Circle"
+                  onClick={
+                    isInteractive
+                      ? () => onAddField!("careCircle")
+                      : undefined
+                  }
+                />
+              )}
+            </motion.span>
+            <motion.span
+              key={`services-${hasServices}`}
+              layout
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ type: "spring", stiffness: 400, damping: 30 }}
+              className="fresh-pill inline-flex"
+            >
+              {hasServices ? (
+                <FilledPill
+                  value={`${recipient.activeServices} active ${recipient.activeServices === 1 ? "service" : "services"}`}
+                />
+              ) : (
+                <AddChip
+                  label="Services"
+                  onClick={
+                    isInteractive
+                      ? () => onAddField!("services")
+                      : undefined
+                  }
+                />
+              )}
+            </motion.span>
+          </AnimatePresence>
+        </motion.div>
 
         {/* Progress dots */}
-        <div className="mt-4">
+        <motion.div layout className="mt-4">
           <ProgressDots fields={fields} />
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
       {/* Avatar */}
       <div className="absolute left-6 top-5 rounded-full shadow-nw-sm">
@@ -262,6 +408,28 @@ export function RecipientCard({ recipient, onClick }: Props) {
           </span>
         </div>
       </div>
+    </LayoutGroup>
+  );
+
+  if (isInteractive) {
+    return (
+      <article
+        aria-label={recipient.name}
+        className={`${cardClassName} cursor-default`}
+      >
+        {inner}
+      </article>
+    );
+  }
+
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-label={recipient.name}
+      className={cardClassName}
+    >
+      {inner}
     </button>
   );
 }

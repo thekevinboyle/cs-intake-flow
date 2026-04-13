@@ -1,5 +1,6 @@
 import { RecipientCard } from "./components/RecipientCard";
 import { RecipientCardLive } from "./components/RecipientCardLive";
+import { InteractiveCardDemo } from "./components/InteractiveCardDemo";
 import { IntakeFlow } from "./components/IntakeFlow";
 import {
   mockRecipients,
@@ -73,20 +74,26 @@ function App() {
           ────────────────────────────────────────────────────────────── */}
       <section className="mb-14">
         <h2 className="mb-2 font-display text-xl font-semibold text-nw-primary">
-          2 · The redesign — empty, partial, full
+          2 · The redesign — try it live
         </h2>
         <p className="mb-5 max-w-2xl text-sm text-nw-tertiary">
           Progressive completion pattern: every field slot is always visible as
-          either a filled pill or a dashed "add" chip. The user sees what's done,
-          what's next, and how to get there. Empty cards get a warm invitation
-          instead of dead dashes.
+          either a filled pill or a dashed "add" chip. Click a chip on the first
+          card to add a field and watch the layout animate. Built with Motion{" "}
+          <code className="rounded bg-nw-bg-subtle px-1 text-xs">layout</code>{" "}
+          animations and CSS{" "}
+          <code className="rounded bg-nw-bg-subtle px-1 text-xs">
+            @starting-style
+          </code>
+          . Hover the activity strip on the full card for an anchor-positioned
+          popover.
         </p>
         <div className="flex flex-wrap gap-6">
           <div>
             <div className="mb-2 text-xs font-medium uppercase tracking-wide text-nw-quaternary">
-              Empty
+              Interactive
             </div>
-            <RecipientCard recipient={emptyRecipient} />
+            <InteractiveCardDemo />
           </div>
           <div>
             <div className="mb-2 text-xs font-medium uppercase tracking-wide text-nw-quaternary">
@@ -96,7 +103,7 @@ function App() {
           </div>
           <div>
             <div className="mb-2 text-xs font-medium uppercase tracking-wide text-nw-quaternary">
-              Full
+              Full (hover the activity)
             </div>
             <RecipientCard recipient={fullRecipient} />
           </div>
